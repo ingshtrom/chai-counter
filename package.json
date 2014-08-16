@@ -1,0 +1,51 @@
+{
+  "name": "chai-counter",
+  "description": "Count your chai assertions!",
+  "version": "0.1.0",
+  "homepage": "https://github.com/ingshtrom/chai-counter",
+  "keywords": [
+    "chaijs",
+    "assertions",
+    "counter",
+    "utilities",
+    "plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ingshtrom/chai-counter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ingshtrom/chai-counter/issues"
+  },
+  "author": {
+    "name": "Alex Hokanson",
+    "email": "alex.hokanson@mysticgear.com",
+    "url": "http://mysticgear.com/"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/ingshtrom/chai-counter/blob/master/LICENSE.txt"
+    }
+  ],
+  "main": "./index.js",
+  "engines": {
+    "node": ">= 0.10.x"
+  },
+  "dependencies": {
+    "chai": "1.9.1"
+  },
+  "devDependencies": {
+    "grunt": "0.4.5",
+    "grunt-contrib-clean": "0.5.0",
+    "grunt-coffeelint": "0.0.10",
+    "grunt-contrib-coffee": "0.10.1",
+    "mocha": "1.21.4"
+  },
+  "scripts": {
+    "prepublish": "grunt coffee:src",
+    "pretest": "grunt coffee:test",
+    "test": "mocha --reporter spec --bail --check-leaks pub/test/",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha --reporter dot --check-leaks pub/test/"
+  }
+}
