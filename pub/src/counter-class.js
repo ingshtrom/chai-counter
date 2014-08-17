@@ -8,6 +8,7 @@
     function Counter(expected) {
       this.expected = expected;
       this.assert = __bind(this.assert, this);
+      this.add = __bind(this.add, this);
       this.actual = 0;
     }
 
@@ -16,8 +17,6 @@
     };
 
     Counter.prototype.assert = function() {
-      console.log("actual: " + this.actual);
-      console.log("expected: " + this.expected);
       return assert.equal(this.actual, this.expected, "Expected " + this.expected + " assertions, counted only " + this.actual + ".");
     };
 
