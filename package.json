@@ -43,8 +43,8 @@
     "mocha": "1.21.4"
   },
   "scripts": {
-    "prepublish": "grunt coffee",
-    "pretest": "grunt coffee",
+    "prepublish": "npm install -g grunt-cli && grunt coffee",
+    "pretest": "npm install -g grunt-cli && grunt coffee",
     "test": "mocha --reporter spec --bail --check-leaks pub/test/",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha --reporter dot --check-leaks pub/test/"
   }
