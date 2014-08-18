@@ -28,8 +28,7 @@ module.exports = (grunt) ->
             src: ['*.coffee', '!*-spec.coffee']
             dest: '<%= globalConfig.pub %>/src'
             ext: '.js'
-          },
-          'index.js': 'index.coffee'
+          }
         ]
       test:
         files: [

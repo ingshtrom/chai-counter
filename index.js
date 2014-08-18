@@ -1,8 +1,1 @@
-(function() {
-  var chai, counter;
-
-  chai = require('chai');
-
-  counter = require('./src/counter');
-
-}).call(this);
+module.exports = require('./pub/src/index');

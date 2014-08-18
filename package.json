@@ -28,7 +28,7 @@
       "url": "http://github.com/ingshtrom/chai-counter/blob/master/LICENSE.txt"
     }
   ],
-  "main": "./index.js",
+  "main": "./pub/src/index.js",
   "engines": {
     "node": ">= 0.10.x"
   },
@@ -45,7 +45,7 @@
   "scripts": {
     "prepublish": "grunt coffee",
     "pretest": "grunt coffee",
-    "test": "mocha --reporter spec --bail --check-leaks pub/test/",
+    "test": "mocha -c --reporter spec --bail --check-leaks pub/test/",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha --reporter dot --check-leaks pub/test/"
   }
 }

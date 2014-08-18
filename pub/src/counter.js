@@ -1,23 +1,29 @@
 (function() {
-  var Counter, assert;
+  var Counter, assert,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   assert = require('assert');
 
-  Counter = require('./counter-class');
+  Counter = (function() {
+    function Counter(expected) {
+      this.expected = expected;
+      this.assert = __bind(this.assert, this);
+      this.add = __bind(this.add, this);
+      this.actual = 0;
+    }
 
-  module.exports.expect = function(numOfAsserts) {
-    var _counter;
-    return _counter = new Counter(numOfAsserts);
-  };
+    Counter.prototype.add = function() {
+      return this.actual++;
+    };
 
-  module.exports.assert = function() {
-    return assert.equal(_counter.actual, _counter.expected, "Expected " + _counter.expected + " assertions, but only counted " + _counter.actual);
-  };
+    Counter.prototype.assert = function() {
+      return assert.equal(this.actual, this.expected, "Expected " + this.expected + " assertions, counted " + this.actual + ".");
+    };
 
-  module.exports.extensions = function(_chai, utils) {
-    var Assertion;
-    Assertion = chai.Assertion;
-    return Assertion.addProperty('');
-  };
+    return Counter;
+
+  })();
+
+  module.exports = Counter;
 
 }).call(this);
