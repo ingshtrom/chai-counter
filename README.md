@@ -1,8 +1,8 @@
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![Build Status](https://travis-ci.org/ingshtrom/chai-counter.svg?branch=master)](https://travis-ci.org/ingshtrom/chai-counter)
 [![NPM version](https://badge.fury.io/js/chai-counter.svg)](http://badge.fury.io/js/chai-counter)
-[![Dependency Manager](https://david-dm.org/ingshtrom/chai-counter.svg)
-[![devDependency Manager](https://david-dm.org/ingshtrom/chai-counter/dev-status.svg)
+[![Dependency Manager](https://david-dm.org/ingshtrom/chai-counter.svg)](https://david-dm.org/ingshtrom/chai-counter)
+[![devDependency Manager](https://david-dm.org/ingshtrom/chai-counter/dev-status.svg)](https://david-dm.org/ingshtrom/chai-counter#info=devDependencies)
 
 **Note: This has only been tested against Node.js.  I will add browser testing soon.  You can see the test status by clicking the Build Status badge above**
 
