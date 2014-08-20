@@ -1,8 +1,9 @@
-chai = require 'chai'
-should = chai.should()
-CounterClass = require '../src/counter'
-ext = require '../src/extensions'
-counter = require '../src/index' # we want to load it just like a user would
+if (require)
+  chai = require 'chai'
+  should = chai.should()
+  CounterClass = require '../src/counter'
+  ext = require '../src/extensions'
+  counter = require '../src/index' # we want to load it just like a user would
 
 describe 'chai-counter', () ->
 

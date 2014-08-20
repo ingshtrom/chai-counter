@@ -4,6 +4,8 @@ module.exports = (grunt) ->
       pub: 'pub'
       src: 'src'
       test: 'test'
+      lib: 'pub/lib'
+
     pkg: grunt.file.readJSON 'package.json'
     'clean':
       all: ['<%= globalConfig.pub %>/**/*.js']
@@ -41,14 +43,25 @@ module.exports = (grunt) ->
             ext: '.js'
           }
         ]
+    'bower':
+      dist:
+        dest: '<%= globalConfig.pub %>/lib'
+        js_dest: '<%= globalConfig.pub %>/lib/js'
+        css_dest: '<%= globalConfig.pub %>/lib/css'
+    'copy':
+      dist:
+        files:
+          '<%= globalConfig.pub %>/test/browser/index.html': '<%= globalConfig.test %>/browser/index.html'
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks 'grunt-bower'
 
   grunt.registerTask 'default', () ->
     grunt.task.run ['clean:all']
-    grunt.task.run ['coffeelint', 'coffee']
+    grunt.task.run ['coffeelint', 'coffee', 'bower', 'copy']
     grunt.file.mkdir 'logs'
 
   grunt.registerTask 'dist', () ->

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mocha</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../lib/css/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <!-- load lib files -->
+    <script src="../../lib/js/mocha.js"></script>
+    <script src="../../lib/js/chai.js"></script>
+    <!-- load source files  -->
+    <script src="../../src/"
+    <!-- load spec files -->
+    <script src="../counter-spec.js"></script>
+    <script src="../index-spec.js"></script>
+    <!-- run tests! -->
+    <script>
+      mocha.setup('bdd')
+      mocha.checkLeaks();
+      mocha.run();
+    </script>
+  </body>
+</html>

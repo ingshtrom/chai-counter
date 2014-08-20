@@ -40,11 +40,13 @@
     "grunt-contrib-clean": "0.5.0",
     "grunt-coffeelint": "0.0.10",
     "grunt-contrib-coffee": "0.10.1",
+    "grunt-bower": "0.14.0",
+    "grunt-contrib-copy": "0.5.0",
     "mocha": "1.21.4"
   },
   "scripts": {
-    "prepublish": "grunt coffee",
-    "pretest": "grunt coffee",
+    "prepublish": "grunt",
+    "pretest": "grunt",
     "test": "mocha -c --reporter spec --bail --check-leaks pub/test/",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha --reporter dot --check-leaks pub/test/"
   }

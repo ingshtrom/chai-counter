@@ -1,0 +1,24 @@
+{
+  "name": "chai-counter",
+  "version": "0.1.0",
+  "homepage": "https://github.com/ingshtrom/chai-counter",
+  "authors": [
+    "ingshtrom <alex.hokanson@mysticgear.com>"
+  ],
+  "description": "Count assertions for Chai.js",
+  "keywords": [
+    "test",
+    "chai.js",
+    "plugin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "mocha": "1.21.4",
+    "chai": "1.9.1"
+  }
+}
