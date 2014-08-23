@@ -21,6 +21,8 @@ module.exports = (grunt) ->
       ]
       test: ['<%= globalConfig.test %>/**/*-spec.coffee']
     'coffee':
+      options:
+        bare: true
       src:
         files: [
           {

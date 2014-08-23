@@ -1,8 +1,10 @@
+exports = exports ? this
+
 if typeof require == 'function'
   chai = require 'chai'
-
-# expect 'chai' to be loaded
-assert = chai.assert
+  assert = chai.assert
+else
+  assert = this['chai'].assert
 
 class Counter
   constructor: (@expected) ->
@@ -14,4 +16,4 @@ class Counter
       @expected,
       "Expected #{@expected} assertions, counted #{@actual}."
 
-module.exports = Counter
+exports.class = Counter

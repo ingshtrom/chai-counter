@@ -1,11 +1,12 @@
 if typeof require == 'function'
   console.log 'require exists and is a function.  Going to assume we are in a Node.js environment.'
   chai = require 'chai'
-  Counter = require '../src/counter'
+  Counter = require ('../src/counter').class
   ext = require '../src/extensions'
   counter = require '../src/index' # we want to load it like a user would
-
-should = chai.should()
+  should = chai.should()
+else
+  should = this['chai'].should()
 
 describe 'chai-counter', () ->
 

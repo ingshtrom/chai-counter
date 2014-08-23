@@ -4,9 +4,10 @@
 
   if (typeof require === 'function') {
     chai = require('chai');
+    assert = chai.assert;
+  } else {
+    assert = this['chai'].assert;
   }
-
-  assert = chai.assert;
 
   Counter = (function() {
     function Counter(expected) {
@@ -28,6 +29,6 @@
 
   })();
 
-  module.exports = Counter;
+  exports["class"] = Counter;
 
 }).call(this);

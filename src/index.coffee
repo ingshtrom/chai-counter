@@ -1,9 +1,14 @@
-if typeof require == 'function'
-  chai = require 'chai'
-  extensions = require './extensions'
+exports = exports ? this
 
-# expect 'chai' to be loaded
-# expect 'extensions' to be loaded
+if typeof require == 'function'
+  tmpChai = require 'chai'
+  tmpExtensions = require './extensions'
+else
+  tmpExtensions = extensions
+  tmpChai = chai
+
+chai = tmpChai
+extensions = tmpExtensions
 
 module.exports.expect = (expectedAsserts) ->
   extensions.expect expectedAsserts

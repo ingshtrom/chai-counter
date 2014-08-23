@@ -12,16 +12,15 @@
     <script src="../../src/chai-counter.js"></script>
     <script src="./counter.js"></script>
     <!-- load spec files -->
+    <script>mocha.setup('bdd');</script>
     <script src="../counter-spec.js"></script>
     <script src="../index-spec.js"></script>
     <!-- run tests! -->
     <script>
       onload = function() {
-        console.log('time to run tests');
-        counter = window["chai-counter"];
-        Counter = window["Counter"];
-        chai.user(counter["chai-counter-plugin"]);
-        mocha.setup('bdd');
+        counter = this["chai-counter"];
+        Counter = this["Counter"].class;
+        chai.use(counter["chai-counter-plugin"]);
         mocha.checkLeaks();
         mocha.run();
       }
