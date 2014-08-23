@@ -1,6 +1,9 @@
-chai = require 'chai'
+if typeof require == 'function'
+  console.log 'require exists and is a function.  Going to assume we are in a Node.js environment.'
+  chai = require 'chai'
+  Counter = require '../src/counter'
+
 should = chai.should()
-Counter = require '../src/counter'
 
 describe 'Counter', () ->
   describe 'contructor', () ->

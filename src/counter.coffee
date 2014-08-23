@@ -1,4 +1,8 @@
-assert = require 'assert'
+if typeof require == 'function'
+  chai = require 'chai'
+
+# expect 'chai' to be loaded
+assert = chai.assert
 
 class Counter
   constructor: (@expected) ->

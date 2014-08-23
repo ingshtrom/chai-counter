@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mocha</title>
+    <title>Chai-Counter Tests</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../lib/css/mocha.css" />
-  </head>
-  <body>
-    <div id="mocha"></div>
     <!-- load lib files -->
     <script src="../../lib/js/mocha.js"></script>
     <script src="../../lib/js/chai.js"></script>
     <!-- load source files  -->
-    <script src="../../src/"
+    <script src="../../src/chai-counter.js"></script>
+    <script src="./counter.js"></script>
     <!-- load spec files -->
     <script src="../counter-spec.js"></script>
     <script src="../index-spec.js"></script>
     <!-- run tests! -->
     <script>
-      mocha.setup('bdd')
-      mocha.checkLeaks();
-      mocha.run();
+      onload = function() {
+        console.log('time to run tests');
+        counter = window["chai-counter"];
+        Counter = window["Counter"];
+        chai.user(counter["chai-counter-plugin"]);
+        mocha.setup('bdd');
+        mocha.checkLeaks();
+        mocha.run();
+      }
     </script>
+  </head>
+  <body>
+    <div id="mocha"></div>
   </body>
 </html>

@@ -31,6 +31,17 @@ chai = require 'chai'
 counter = require 'chai-counter'
 ```
 
+Alternatively, **if you are writing for the browser**, you will load the scripts in this fashion.
+
+```html
+<script type="text/javascript" src="/chai.js"></script>
+<script type="text/javascript" src="/chai-counter.js"></script>
+<script type="text/javascript">
+  counter = window["chai-counter"]
+  chai.use(counter["chai-counter-plug"])
+</script>
+```
+
 Then, tell `chai-counter` how many assertions you expect.
 
 ```coffeescript
@@ -50,3 +61,5 @@ Finally, make sure you assert that all of your assertions were checked.
 ```coffeescript
 counter.assert()
 ```
+
+__NOTE__ After loading, the `counter.expect(4)` and `counter.assert()` calls will be exactly the same for both Node.js and the browser.

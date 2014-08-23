@@ -1,6 +1,10 @@
-chai = require 'chai'
+if typeof require == 'function'
+  chai = require 'chai'
+  Counter = require './counter'
+
+# expect 'chai' to be loaded
+# expect 'Counter' to be loaded
 expect = chai.expect
-Counter = require './counter'
 _counter = null
 
 _addAssertion = () =>
@@ -10,7 +14,7 @@ _addAssertion = () =>
 
 # #extensions
 # setup the extensi
-module.exports.setupHelper = (_chai, utils) =>
+module.exports['chai-counter-plugin'] = (_chai, utils) =>
   Assertion = chai.Assertion
   Assertion.addChainableMethod 'cc', _addAssertion, _addAssertion
 

@@ -1,8 +1,12 @@
 (function() {
-  var Counter, assert,
+  var Counter, assert, chai,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  assert = require('assert');
+  if (typeof require === 'function') {
+    chai = require('chai');
+  }
+
+  assert = chai.assert;
 
   Counter = (function() {
     function Counter(expected) {

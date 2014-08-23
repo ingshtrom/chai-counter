@@ -8,9 +8,9 @@ module.exports = (grunt) ->
 
     pkg: grunt.file.readJSON 'package.json'
     'clean':
-      all: ['<%= globalConfig.pub %>/**/*.js']
-      src: ['<%= globalConfig.pub %>/src/**/*.js']
-      test: ['<%= globalConfig.pub %>/test/**/*.js']
+      all: ['<%= globalConfig.pub %>/**/*']
+      src: ['<%= globalConfig.pub %>/src/**/*']
+      test: ['<%= globalConfig.pub %>/test/**/*']
     'coffeelint':
       options:
         max_line_length:
@@ -43,6 +43,12 @@ module.exports = (grunt) ->
             ext: '.js'
           }
         ]
+      'browser-src':
+        files:
+          '<%= globalConfig.pub %>/src/chai-counter.js': [
+            '<%= globalConfig.src %>/counter.coffee',
+            '<%= globalConfig.src %>/extensions.coffee'
+          ]
     'bower':
       dist:
         dest: '<%= globalConfig.pub %>/lib'
@@ -52,28 +58,38 @@ module.exports = (grunt) ->
       dist:
         files:
           '<%= globalConfig.pub %>/test/browser/index.html': '<%= globalConfig.test %>/browser/index.html'
+    'concat':
+      'browser-src-chai-counter':
+        options:
+          banner: '(function(exports){'
+          footer: "})(typeof exports === 'undefined'? window['chai-counter']={}: exports);"
+        files:
+          '<%= globalConfig.pub %>/src/chai-counter.js': '<%= globalConfig.pub %>/src/chai-counter.js'
+      'browser-src-counter':
+        options:
+          banner: '(function(exports){'
+          footer: "})(typeof exports === 'undefined'? window['Counter']={}: exports);"
+        files:
+          '<%= globalConfig.pub %>/test/browser/counter.js': '<%= globalConfig.pub %>/src/counter.js'
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-bower'
 
+  concatAndWrapForBrowser = () ->
+    grunt.task.run [
+      'coffee:browser-src',
+      'concat:browser-src-chai-counter',
+      'concat:browser-src-counter'
+    ]
+
   grunt.registerTask 'default', () ->
-    grunt.task.run ['clean:all']
-    grunt.task.run ['coffeelint', 'coffee', 'bower', 'copy']
+    grunt.task.run ['clean:all', 'coffeelint', 'coffee', 'bower', 'copy']
+    concatAndWrapForBrowser()
     grunt.file.mkdir 'logs'
-
-  grunt.registerTask 'dist', () ->
-    grunt.task.run ['coffeelint:src', 'coffee:src']
-    grunt.file.mkdir 'logs'
-
-  grunt.registerTask 'lint', ['coffeelint']
-  grunt.registerTask 'lint:src', ['coffeelint:src']
-  grunt.registerTask 'lint:test', ['coffeelint:test']
-
-  grunt.registerTask 'build', () ->
-    grunt.task.run ['clean:all', 'coffeelint', 'coffee']
 
   grunt.registerTask 'test', () ->
-    grunt.task.run ['coffeelint:test', 'coffee:test']
+    grunt.task.run ['dist', 'coffeelint:test', 'coffee:test']

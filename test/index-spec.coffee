@@ -1,9 +1,11 @@
-if (require)
+if typeof require == 'function'
+  console.log 'require exists and is a function.  Going to assume we are in a Node.js environment.'
   chai = require 'chai'
-  should = chai.should()
-  CounterClass = require '../src/counter'
+  Counter = require '../src/counter'
   ext = require '../src/extensions'
-  counter = require '../src/index' # we want to load it just like a user would
+  counter = require '../src/index' # we want to load it like a user would
+
+should = chai.should()
 
 describe 'chai-counter', () ->
 
@@ -15,11 +17,13 @@ describe 'chai-counter', () ->
     it 'should throw Error if passed null', () ->
       testFunc = () ->
         counter.expect null
-      testFunc.should.throw Error, 'expectedAsserts needs to be of type \'number\''
+      testFunc.should.throw Error,
+        'expectedAsserts needs to be of type \'number\''
 
     it 'should throw Error if passed undefined', () ->
       # same as passing no arguments
-      counter.expect.should.throw Error, 'expectedAsserts needs to be of type \'number\''
+      counter.expect.should.throw Error,
+        'expectedAsserts needs to be of type \'number\''
 
     it 'should throw Error if passed negative number', () ->
       testFunc = () ->
@@ -39,7 +43,7 @@ describe 'chai-counter', () ->
     it 'returns a new Counter instance', () ->
       # this is the best we can do to check that a new
       # counter instance is created
-      counter.expect(5).should.be.instanceof(CounterClass)
+      counter.expect(5).should.be.instanceof(Counter)
 
   describe '#assert()', () ->
 

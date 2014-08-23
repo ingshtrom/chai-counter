@@ -32,6 +32,6 @@
     "commit": "4180251dd45560f189192e28d3c0ba011f6d8178"
   },
   "_source": "git://github.com/chaijs/chai.git",
-  "_target": "*",
+  "_target": "1.9.1",
   "_originalSource": "chai"
 }
