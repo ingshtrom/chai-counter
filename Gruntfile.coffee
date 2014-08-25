@@ -25,21 +25,6 @@ module.exports = (grunt) ->
       platform: 'Windows 8'
     },
     {
-      browserName: 'opera'
-      version: '11'
-      platform: 'Windows 7'
-    },
-    {
-      browserName: 'opera'
-      version: '12'
-      platform: 'Windows 7'
-    },
-    {
-      browserName: 'safari'
-      version: '5'
-      platform: 'OS X 10.6'
-    },
-    {
       browserName: 'safari'
       version: '6'
       platform: 'OS X 10.8'
@@ -143,9 +128,8 @@ module.exports = (grunt) ->
           urls: ["http://127.0.0.1:9999/pub/test/browser/index.html"],
           tunnelTimeout: 5,
           build: process.env.TRAVIS_BUILD_NUMBER,
-          concurrency: 2,
           browsers: browsers,
-          testname: "chai-counter browser tests",
+          testname: "chai-counter unit tests",
           tags: [
             "TRAVIS_JOB_ID: " + process.env.TRAVIS_JOB_ID,
             "TRAVIS_JOB_NUMBER: " + process.env.TRAVIS_JOB_NUMBER,
