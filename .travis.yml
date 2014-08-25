@@ -1,7 +1,12 @@
 language: node_js
 node_js:
-  - "0.11"
-  - "0.10"
-before_install: "npm install -g grunt-cli"
+- '0.11'
+- '0.10'
 before_script:
- - chmod -v +x node_modules/.bin/*
+- npm install -g grunt-cli
+- chmod -v +x node_modules/.bin/*
+- git submodule update --init --recursive
+env:
+  global:
+  - secure: Cp77RBYxGUusvJWoi0vVz8fXN5gAkIGVrYmUSixQKmEzPrwpFZa0Fi3xS8KAilsO84ZXy9bC5DldfuJQ6/iq5RnGTtMRPVm0eyv9/yvDvzaVvuBSbPSB446U9TKdOMdHYhII1Q9/6sfsjOz98DoGGEDMF/Qb6sQVxPTsQqZoMWU=
+  - secure: H95wiLZMki++jpSOW/9CQOju1GwSDNuoINV1gQMiryPR+CmpICr0ExzxEdVN49DLEc52KQiAz8BuIujdulUodyWwBQN8uMLe/WeHo2NY8Q6sOqOLv8yhcK8qh8wl1StmOKSwDse+spgqNOMs+hGz7jmzir6Y0X032HzovrmyhrM=

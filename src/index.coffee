@@ -1,20 +1,15 @@
-exports = exports ? this
-
-if typeof require == 'function'
-  tmpChai = require 'chai'
-  tmpExtensions = require './extensions'
+if require?
+  _chai = require 'chai'
+  _extensions = require './extensions'
 else
-  tmpExtensions = extensions
-  tmpChai = chai
+  _extensions = extensions
+  _chai = chai
 
-chai = tmpChai
-extensions = tmpExtensions
+exports.expect = (expectedAsserts) ->
+  _extensions.expect expectedAsserts
 
-module.exports.expect = (expectedAsserts) ->
-  extensions.expect expectedAsserts
-
-module.exports.assert = () ->
-  extensions.assert()
+exports.assert = () ->
+  _extensions.assert()
 
 # now register our extensions with Chai.js!
-chai.use(extensions['chai-counter-plugin'])
+_chai.use(_extensions.plugin)

@@ -1,10 +1,9 @@
-exports = exports ? this
-
-if typeof require == 'function'
-  chai = require 'chai'
-  assert = chai.assert
+if require?
+  _chai = require 'chai'
+  _assert = _chai.assert
 else
-  assert = this['chai'].assert
+  _chai = this['chai']
+  _assert = _chai.assert
 
 class Counter
   constructor: (@expected) ->
@@ -12,7 +11,7 @@ class Counter
   add: () =>
     @actual++
   assert: () =>
-    assert.equal @actual,
+    _assert.equal @actual,
       @expected,
       "Expected #{@expected} assertions, counted #{@actual}."
 

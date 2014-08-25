@@ -28,7 +28,7 @@
       "url": "http://github.com/ingshtrom/chai-counter/blob/master/LICENSE.txt"
     }
   ],
-  "main": "./pub/src/index.js",
+  "main": "./index.js",
   "engines": {
     "node": ">= 0.10.x"
   },
@@ -43,12 +43,15 @@
     "grunt-bower": "0.14.0",
     "grunt-contrib-copy": "0.5.0",
     "grunt-contrib-concat": "0.5.0",
-    "mocha": "1.21.4"
+    "mocha": "1.21.4",
+    "grunt-saucelabs": "8.3.1",
+    "grunt-contrib-connect": "0.8.0",
+    "grunt-contrib-watch": "0.6.1"
   },
   "scripts": {
     "prepublish": "grunt",
     "pretest": "grunt",
-    "test": "mocha -c --reporter spec --bail --check-leaks pub/test/",
+    "test": "mocha -c --reporter spec --bail --check-leaks pub/test/ && grunt test:browser:sauce",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha --reporter dot --check-leaks pub/test/"
   }
 }

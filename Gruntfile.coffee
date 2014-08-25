@@ -1,4 +1,24 @@
 module.exports = (grunt) ->
+  browsers = [
+    {
+      browserName: 'firefox'
+      platform: 'XP'
+    },
+    {
+      browserName: 'googlechrome'
+      platform: 'XP'
+    },
+    {
+      browserName: 'googlechrome'
+      platform: 'linux'
+    },
+    {
+      browserName: 'internet explorer'
+      version: '10'
+      platform: 'WIN8'
+    }
+  ]
+
   grunt.initConfig
     globalConfig:
       pub: 'pub'
@@ -23,6 +43,7 @@ module.exports = (grunt) ->
     'coffee':
       options:
         bare: true
+        sourceMap: true
       src:
         files: [
           {
@@ -64,28 +85,50 @@ module.exports = (grunt) ->
       'browser-src-chai-counter':
         options:
           banner: '(function(exports){'
-          footer: "})(typeof exports === 'undefined'? window['chai-counter']={}: exports);"
+          footer: "})(window['chai_counter']={});" + "\r\n\r\n" + "chai.use(this.chai_counter.plugin);"
         files:
           '<%= globalConfig.pub %>/src/chai-counter.js': '<%= globalConfig.pub %>/src/chai-counter.js'
       'browser-src-counter':
         options:
           banner: '(function(exports){'
-          footer: "})(typeof exports === 'undefined'? window['Counter']={}: exports);"
+          footer: "})(window['Counter']={});"
         files:
           '<%= globalConfig.pub %>/test/browser/counter.js': '<%= globalConfig.pub %>/src/counter.js'
+      'browser-src-extensions':
+        options:
+          banner: '(function(exports){'
+          footer: "})(window['extensions']={});"
+        files:
+          '<%= globalConfig.pub %>/test/browser/extensions.js': '<%= globalConfig.pub %>/src/extensions.js'
+    'connect':
+      server:
+        options:
+          base: ""
+          port: 9999
+    'saucelabs-mocha':
+      all:
+        options:
+          urls: ["http://127.0.0.1:9999/pub/test/browser/index.html"],
+          tunnelTimeout: 5,
+          build: process.env.TRAVIS_JOB_ID,
+          concurrency: 2,
+          browsers: browsers,
+          testname: "chai-counter browser tests",
+          tags: ["master"]
+    'watch': {}
 
-  grunt.loadNpmTasks 'grunt-contrib-clean'
-  grunt.loadNpmTasks 'grunt-coffeelint'
-  grunt.loadNpmTasks 'grunt-contrib-coffee'
-  grunt.loadNpmTasks 'grunt-contrib-copy'
-  grunt.loadNpmTasks 'grunt-contrib-concat'
-  grunt.loadNpmTasks 'grunt-bower'
+  # loading dependencies
+  devDeps = grunt.file.readJSON("package.json").devDependencies
+  for key, value of devDeps
+    if key != "grunt" && key.indexOf("grunt") == 0
+      grunt.loadNpmTasks key
 
   concatAndWrapForBrowser = () ->
     grunt.task.run [
       'coffee:browser-src',
       'concat:browser-src-chai-counter',
-      'concat:browser-src-counter'
+      'concat:browser-src-counter',
+      'concat:browser-src-extensions'
     ]
 
   grunt.registerTask 'default', () ->
@@ -94,4 +137,38 @@ module.exports = (grunt) ->
     grunt.file.mkdir 'logs'
 
   grunt.registerTask 'test', () ->
-    grunt.task.run ['dist', 'coffeelint:test', 'coffee:test']
+    grunt.util.spawn {
+      cmd: 'npm'
+      grunt: false
+      args: ['test']
+    }, (err, result, code) ->
+      if error?
+        grunt.log.errorln 'error running tests'
+        grunt.log.errorln "stderr: #{result.stderr}"
+        return
+      grunt.log.writeln "stdout: #{result.stdout}"
+
+  grunt.registerTask 'test:browser:sauce', () ->
+    grunt.task.run [
+      'clean:all',
+      'coffeelint',
+      'coffee',
+      'bower',
+      'copy',
+      'concat',
+      'connect',
+      'saucelabs-mocha'
+    ]
+
+  grunt.registerTask 'test:browser:local', () ->
+    grunt.task.run [
+      'clean:all',
+      'coffeelint',
+      'coffee',
+      'bower',
+      'copy',
+      'concat'
+    ]
+    testUrls = grunt.config.get('saucelabs-mocha.all.options.urls').join(', ')
+    grunt.log.writeln "open your browser to #{testUrls}"
+    grunt.task.run ['connect', 'watch']

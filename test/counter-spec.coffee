@@ -1,8 +1,8 @@
-if typeof require == 'function'
+if require?
   console.log 'require exists and is a function.  Going to assume we are in a Node.js environment.'
-  chai = require 'chai'
+  _chai = require 'chai'
   Counter = require('../src/counter').class
-  should = chai.should()
+  should = _chai.should()
 else
   should = this['chai'].should()
 

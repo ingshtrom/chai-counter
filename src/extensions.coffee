@@ -1,20 +1,20 @@
-if typeof require == 'function'
-  chai = require 'chai'
+if require?
+  _chai = require 'chai'
   Counter = require('./counter').class
-  expect = chai.expect
+  _expect = _chai.expect
 else
-  expect = this['chai'].expect
+  _expect = this['chai'].expect
 
 _counter = null
 
 _addAssertion = () =>
-  expect(_counter).to.not.be.equal null,
+  _expect(_counter).to.not.be.equal null,
     "You need to set the expected number of assertions first--use #expect()"
   _counter.add()
 
 # #extensions
 # setup the extensi
-exports['chai-counter-plugin'] = (_chai, utils) =>
+exports.plugin = (_chai, utils) =>
   Assertion = _chai.Assertion
   Assertion.addChainableMethod 'cc', _addAssertion, _addAssertion
 
@@ -22,16 +22,16 @@ exports['chai-counter-plugin'] = (_chai, utils) =>
 # set the number of expected assertions
 # param (number): the number of expected asserts
 exports.expect = (expectedAsserts) =>
-  expect(expectedAsserts).to.be.a('number',
+  _expect(expectedAsserts).to.be.a('number',
     'expectedAsserts needs to be of type \'number\'')
-  expect(expectedAsserts).to.be.above(0, 'expectedAsserts needs to be > 0')
+  _expect(expectedAsserts).to.be.above(0, 'expectedAsserts needs to be > 0')
   _counter = new Counter expectedAsserts
 
 # #assert()
 # make sure the expected number of assertions were made
 # will reset the counter object, so only call this once per test!
 exports.assert = () =>
-  expect(_counter).to.not.be.equal null,
+  _expect(_counter).to.not.be.equal null,
     "You need to set the expected number of assertions first--use #expect()"
   _counter.assert()
   _counter = null # need to reset _counter for the next time it is used
