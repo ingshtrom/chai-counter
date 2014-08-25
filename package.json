@@ -49,8 +49,7 @@
     "grunt-contrib-watch": "0.6.1"
   },
   "scripts": {
-    "prepublish": "grunt",
-    "pretest": "grunt",
+    "pretest": "grunt test:setup",
     "test": "mocha -c --reporter spec --bail --check-leaks pub/test/ && grunt test:browser:sauce",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha --reporter dot --check-leaks pub/test/"
   }

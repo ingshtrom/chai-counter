@@ -1,21 +1,53 @@
 module.exports = (grunt) ->
+  # just testing what Chai.js uses: https://github.com/chaijs/chai
+  # added a few extras
   browsers = [
     {
       browserName: 'firefox'
-      platform: 'XP'
+      version: '22'
+      platform: 'Windows 7'
     },
     {
-      browserName: 'googlechrome'
-      platform: 'XP'
+      browserName: 'firefox'
+      platform: 'Windows 8.1'
     },
     {
-      browserName: 'googlechrome'
+      browserName: 'chrome'
       platform: 'linux'
+    },
+    {
+      browserName: 'chrome'
+      platform: 'Windows 8.1'
     },
     {
       browserName: 'internet explorer'
       version: '10'
-      platform: 'WIN8'
+      platform: 'Windows 8'
+    },
+    {
+      browserName: 'opera'
+      version: '11'
+      platform: 'Windows 7'
+    },
+    {
+      browserName: 'opera'
+      version: '12'
+      platform: 'Windows 7'
+    },
+    {
+      browserName: 'safari'
+      version: '5'
+      platform: 'OS X 10.6'
+    },
+    {
+      browserName: 'safari'
+      version: '6'
+      platform: 'OS X 10.8'
+    },
+    {
+      browserName: 'safari'
+      version: '7'
+      platform: 'OS X 10.9'
     }
   ]
 
@@ -136,31 +168,7 @@ module.exports = (grunt) ->
     concatAndWrapForBrowser()
     grunt.file.mkdir 'logs'
 
-  grunt.registerTask 'test', () ->
-    grunt.util.spawn {
-      cmd: 'npm'
-      grunt: false
-      args: ['test']
-    }, (err, result, code) ->
-      if error?
-        grunt.log.errorln 'error running tests'
-        grunt.log.errorln "stderr: #{result.stderr}"
-        return
-      grunt.log.writeln "stdout: #{result.stdout}"
-
-  grunt.registerTask 'test:browser:sauce', () ->
-    grunt.task.run [
-      'clean:all',
-      'coffeelint',
-      'coffee',
-      'bower',
-      'copy',
-      'concat',
-      'connect',
-      'saucelabs-mocha'
-    ]
-
-  grunt.registerTask 'test:browser:local', () ->
+  grunt.registerTask 'test:setup', () ->
     grunt.task.run [
       'clean:all',
       'coffeelint',
@@ -169,6 +177,18 @@ module.exports = (grunt) ->
       'copy',
       'concat'
     ]
+
+  grunt.registerTask 'test:browser:sauce', () ->
+    grunt.task.run [
+      'connect',
+      'saucelabs-mocha'
+    ]
+
+  grunt.registerTask 'test:browser:local', () ->
     testUrls = grunt.config.get('saucelabs-mocha.all.options.urls').join(', ')
     grunt.log.writeln "open your browser to #{testUrls}"
-    grunt.task.run ['connect', 'watch']
+    grunt.task.run [
+      'test:setup',
+      'connect',
+      'watch'
+    ]

@@ -5,7 +5,6 @@ node_js:
 before_script:
 - npm install -g grunt-cli
 - chmod -v +x node_modules/.bin/*
-- git submodule update --init --recursive
 env:
   global:
   - secure: Cp77RBYxGUusvJWoi0vVz8fXN5gAkIGVrYmUSixQKmEzPrwpFZa0Fi3xS8KAilsO84ZXy9bC5DldfuJQ6/iq5RnGTtMRPVm0eyv9/yvDvzaVvuBSbPSB446U9TKdOMdHYhII1Q9/6sfsjOz98DoGGEDMF/Qb6sQVxPTsQqZoMWU=
