@@ -142,11 +142,17 @@ module.exports = (grunt) ->
         options:
           urls: ["http://127.0.0.1:9999/pub/test/browser/index.html"],
           tunnelTimeout: 5,
-          build: process.env.TRAVIS_JOB_ID,
+          build: process.env.TRAVIS_BUILD_NUMBER,
           concurrency: 2,
           browsers: browsers,
           testname: "chai-counter browser tests",
-          tags: ["master"]
+          tags: [
+            "TRAVIS_JOB_ID: " + process.env.TRAVIS_JOB_ID,
+            "TRAVIS_JOB_NUMBER: " + process.env.TRAVIS_JOB_NUMBER,
+            "TRAVIS_BUILD_ID: " + process.env.TRAVIS_BUILD_ID,
+            "TRAVIS_BUILD_NUMBER: " + process.env.TRAVIS_BUILD_NUMBER,
+            "TRAVIS_REPO_SLUG: " + process.env.TRAVIS_REPO_SLUG
+          ]
     'watch': {}
 
   # loading dependencies
