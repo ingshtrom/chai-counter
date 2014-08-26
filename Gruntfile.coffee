@@ -140,7 +140,7 @@ module.exports = (grunt) ->
           tunnelTimeout: 5,
           build: process.env.TRAVIS_BUILD_NUMBER,
           browsers: browsers,
-          testname: "chai-counter unit tests"
+          testname: "chai-counter unit tests",
           sauceConfig: sauceSerializedTestConfig
     'watch': {}
 
@@ -173,6 +173,10 @@ module.exports = (grunt) ->
     ]
 
   grunt.registerTask 'test:browser:sauce', () ->
+    if (process.env.TRAVIS
+      && process.env.CI
+      && process.env.TRAVIS_NODE_VERSION.indexOf("0.11") < 0)
+      return
     grunt.task.run [
       'connect',
       'saucelabs-mocha'
