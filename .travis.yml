@@ -1,10 +1,13 @@
-language: node_js
+language:
+- node_js
 node_js:
 - '0.11'
 - '0.10'
 before_script:
 - npm install -g grunt-cli istanbul
 - chmod -v +x node_modules/.bin/*
+after_script:
+- npm run-script test-cov
 env:
   global:
   - secure: Cp77RBYxGUusvJWoi0vVz8fXN5gAkIGVrYmUSixQKmEzPrwpFZa0Fi3xS8KAilsO84ZXy9bC5DldfuJQ6/iq5RnGTtMRPVm0eyv9/yvDvzaVvuBSbPSB446U9TKdOMdHYhII1Q9/6sfsjOz98DoGGEDMF/Qb6sQVxPTsQqZoMWU=
