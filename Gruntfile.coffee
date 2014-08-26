@@ -36,6 +36,16 @@ module.exports = (grunt) ->
     }
   ]
 
+  sauceSerializedTestTags = JSON.stringify({
+    tags:  [
+      "TRAVIS_JOB_ID: " + process.env.TRAVIS_JOB_ID,
+      "TRAVIS_JOB_NUMBER: " + process.env.TRAVIS_JOB_NUMBER,
+      "TRAVIS_BUILD_ID: " + process.env.TRAVIS_BUILD_ID,
+      "TRAVIS_BUILD_NUMBER: " + process.env.TRAVIS_BUILD_NUMBER,
+      "TRAVIS_REPO_SLUG: " + process.env.TRAVIS_REPO_SLUG
+    ]
+  })
+
   grunt.initConfig
     globalConfig:
       pub: 'pub'
@@ -130,13 +140,7 @@ module.exports = (grunt) ->
           build: process.env.TRAVIS_BUILD_NUMBER,
           browsers: browsers,
           testname: "chai-counter unit tests",
-          tags: [
-            "TRAVIS_JOB_ID: " + process.env.TRAVIS_JOB_ID,
-            "TRAVIS_JOB_NUMBER: " + process.env.TRAVIS_JOB_NUMBER,
-            "TRAVIS_BUILD_ID: " + process.env.TRAVIS_BUILD_ID,
-            "TRAVIS_BUILD_NUMBER: " + process.env.TRAVIS_BUILD_NUMBER,
-            "TRAVIS_REPO_SLUG: " + process.env.TRAVIS_REPO_SLUG
-          ]
+          tags:
     'watch': {}
 
   # loading dependencies
@@ -156,7 +160,6 @@ module.exports = (grunt) ->
   grunt.registerTask 'default', () ->
     grunt.task.run ['clean:all', 'coffeelint', 'coffee', 'bower', 'copy']
     concatAndWrapForBrowser()
-    grunt.file.mkdir 'logs'
 
   grunt.registerTask 'test:setup', () ->
     grunt.task.run [

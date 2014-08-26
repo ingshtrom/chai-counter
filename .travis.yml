@@ -3,9 +3,13 @@ node_js:
 - '0.11'
 - '0.10'
 before_script:
-- npm install -g grunt-cli
+- npm install -g grunt-cli istanbul
 - chmod -v +x node_modules/.bin/*
 env:
   global:
   - secure: Cp77RBYxGUusvJWoi0vVz8fXN5gAkIGVrYmUSixQKmEzPrwpFZa0Fi3xS8KAilsO84ZXy9bC5DldfuJQ6/iq5RnGTtMRPVm0eyv9/yvDvzaVvuBSbPSB446U9TKdOMdHYhII1Q9/6sfsjOz98DoGGEDMF/Qb6sQVxPTsQqZoMWU=
   - secure: H95wiLZMki++jpSOW/9CQOju1GwSDNuoINV1gQMiryPR+CmpICr0ExzxEdVN49DLEc52KQiAz8BuIujdulUodyWwBQN8uMLe/WeHo2NY8Q6sOqOLv8yhcK8qh8wl1StmOKSwDse+spgqNOMs+hGz7jmzir6Y0X032HzovrmyhrM=
+  - secure: Ak888RLnZHg6c1kpjsyECMYcvcvcCE77LscA+NZN7huuZiZ3dd2xKivX5XTXVIYyjMBMV4h3fcrjQCn7ul6KxjTRl3U2z6/ooJYwXG7cMfb33qWDzDoikEbyJTyeIZ79cEpGmNFdVIQ0cTjYQdhxpVtNQr0uhhiIQBHU/qDINBA=
+branches:
+  only:
+  - master
