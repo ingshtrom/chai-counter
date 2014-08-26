@@ -173,9 +173,7 @@ module.exports = (grunt) ->
     ]
 
   grunt.registerTask 'test:browser:sauce', () ->
-    if (process.env.TRAVIS
-      && process.env.CI
-      && process.env.TRAVIS_NODE_VERSION.indexOf("0.11") < 0)
+    if process.env.TRAVIS && process.env.CI && process.env.TRAVIS_NODE_VERSION.indexOf("0.11") < 0
       return
     grunt.task.run [
       'connect',
