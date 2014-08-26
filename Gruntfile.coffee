@@ -36,7 +36,8 @@ module.exports = (grunt) ->
     }
   ]
 
-  sauceSerializedTestTags = JSON.stringify({
+  sauceSerializedTestConfig = JSON.stringify({
+    public: "public"
     tags:  [
       "TRAVIS_JOB_ID: " + process.env.TRAVIS_JOB_ID,
       "TRAVIS_JOB_NUMBER: " + process.env.TRAVIS_JOB_NUMBER,
@@ -139,8 +140,8 @@ module.exports = (grunt) ->
           tunnelTimeout: 5,
           build: process.env.TRAVIS_BUILD_NUMBER,
           browsers: browsers,
-          testname: "chai-counter unit tests",
-          tags:
+          testname: "chai-counter unit tests"
+          sauceConfig: sauceSerializedTestConfig
     'watch': {}
 
   # loading dependencies
