@@ -48,6 +48,4 @@ exports._testable = {
     };
   })(this)
 };
-
-//# sourceMappingURL=extensions.js.map
 })(window['extensions']={});

@@ -30,5 +30,3 @@ Counter = (function() {
 })();
 
 exports["class"] = Counter;
-
-//# sourceMappingURL=counter.js.map

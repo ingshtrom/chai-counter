@@ -1,4 +1,4 @@
-(function(exports){var Counter, _addAssertion, _assert, _chai, _counter, _expect,
+(function(exports){var Counter, _assert, _chai,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 if (typeof require !== "undefined" && require !== null) {
@@ -30,6 +30,8 @@ Counter = (function() {
 })();
 
 exports["class"] = Counter;
+
+var Counter, _addAssertion, _chai, _counter, _expect;
 
 if (typeof require !== "undefined" && require !== null) {
   _chai = require('chai');
@@ -79,8 +81,6 @@ exports._testable = {
     };
   })(this)
 };
-
-//# sourceMappingURL=chai-counter.js.map
 })(window['chai_counter']={});
 
 chai.use(this.chai_counter.plugin);

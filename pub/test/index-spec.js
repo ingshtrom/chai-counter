@@ -94,5 +94,3 @@ describe('chai-counter', function() {
     });
   });
 });
-
-//# sourceMappingURL=index-spec.js.map

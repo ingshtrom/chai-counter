@@ -17,5 +17,3 @@ exports.assert = function() {
 };
 
 _chai.use(_extensions.plugin);
-
-//# sourceMappingURL=index.js.map

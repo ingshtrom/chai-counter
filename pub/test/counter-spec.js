@@ -45,5 +45,3 @@ describe('Counter', function() {
     });
   });
 });
-
-//# sourceMappingURL=counter-spec.js.map
