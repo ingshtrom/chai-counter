@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chai-Counter Tests</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/pub/lib/css/mocha.css" />
+    <!-- load lib files -->
+    <script src="/pub/lib/js/mocha.js"></script>
+    <script src="/pub/lib/js/chai.js"></script>
+    <!-- load source files  -->
+    <script src="/pub/src/chai-counter.js"></script>
+    <!-- we want to test the Counter class separately -->
+    <script src="/pub/test/browser/counter.js"></script>
+    <!-- we need to be able to reset the extensions object manually -->
+    <script src="/pub/test/browser/extensions.js"></script>
+    <!-- load spec files -->
+    <script>mocha.setup('bdd');</script>
+    <script src="/pub/test/counter-spec.js"></script>
+    <script src="/pub/test/index-spec.js"></script>
+    <!-- run tests! -->
+    <script>
+      onload = function() {
+        Counter = this.chai_counter.class;
+        extensions = this.extensions;
+        var runner = mocha.run();
+
+        var failedTests = [];
+        runner.on('end', function(){
+          window.mochaResults = runner.stats;
+          window.mochaResults.reports = failedTests;
+        });
+
+        runner.on('fail', logFailure);
+
+        function logFailure(test, err){
+
+          var flattenTitles = function(test){
+            var titles = [];
+            while (test.parent.title){
+              titles.push(test.parent.title);
+              test = test.parent;
+            }
+            return titles.reverse();
+          };
+
+          failedTests.push({name: test.title, result: false, message: err.message, stack: err.stack, titles: flattenTitles(test) });
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+  </body>
+</html>
