@@ -37,7 +37,7 @@ module.exports = (grunt) ->
   ]
 
   sauceSerializedTestConfig = JSON.stringify({
-    public: "public"
+    public: "public",
     tags:  [
       "TRAVIS_JOB_ID: " + process.env.TRAVIS_JOB_ID,
       "TRAVIS_JOB_NUMBER: " + process.env.TRAVIS_JOB_NUMBER,
@@ -135,11 +135,12 @@ module.exports = (grunt) ->
     'saucelabs-mocha':
       all:
         options:
-          urls: ["http://127.0.0.1:9999/pub/test/browser/index.html"],
-          tunnelTimeout: 5,
-          build: process.env.TRAVIS_BUILD_NUMBER,
-          browsers: browsers,
-          testname: "chai-counter unit tests",
+          urls: ["http://127.0.0.1:9999/pub/test/browser/index.html"]
+          tunnelTimeout: 5
+          build: process.env.TRAVIS_BUILD_NUMBER
+          browsers: browsers
+          testname: "chai-counter unit tests"
+          "max-duration": 60
           sauceConfig: sauceSerializedTestConfig
     'watch': {}
 
