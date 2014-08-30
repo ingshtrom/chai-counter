@@ -36,8 +36,8 @@ module.exports = (grunt) ->
     }
   ]
 
-  sauceSerializedTestConfig = JSON.stringify({
-    public: "public",
+  sauceSerializedTestConfig =
+    public: "public"
     tags:  [
       "TRAVIS_JOB_ID: " + process.env.TRAVIS_JOB_ID,
       "TRAVIS_JOB_NUMBER: " + process.env.TRAVIS_JOB_NUMBER,
@@ -45,7 +45,6 @@ module.exports = (grunt) ->
       "TRAVIS_BUILD_NUMBER: " + process.env.TRAVIS_BUILD_NUMBER,
       "TRAVIS_REPO_SLUG: " + process.env.TRAVIS_REPO_SLUG
     ]
-  })
 
   grunt.initConfig
     globalConfig:
@@ -140,7 +139,6 @@ module.exports = (grunt) ->
           build: process.env.TRAVIS_BUILD_NUMBER
           browsers: browsers
           testname: "chai-counter unit tests"
-          "max-duration": 60
           sauceConfig: sauceSerializedTestConfig
     'watch': {}
 
