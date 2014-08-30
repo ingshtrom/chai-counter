@@ -135,7 +135,7 @@ module.exports = (grunt) ->
       all:
         options:
           urls: ["http://127.0.0.1:9999/pub/test/browser/index.html"]
-          tunnelTimeout: 5
+          tunnelTimeout: 10
           build: process.env.TRAVIS_BUILD_NUMBER
           browsers: browsers
           testname: "chai-counter unit tests"
