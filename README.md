@@ -20,7 +20,7 @@ Because after a while you will have hundreds of tests that will only continue to
 
 How do I get it?
 ----------------
-I got you hooked, right!? Good thing it takes next to nothing to get! It is on [NPM](https://www.npmjs.org/), so you can add it to your `devDependencies` in `package.json` or just run `npm install chai-counter`. Easy-peasy-lemon-squeezy!
+I got you hooked, right!? Good thing it takes next to nothing to get! It is on [NPM](https://www.npmjs.org/), so you can add it to your `devDependencies` in `package.json` or just run `npm install chai-counter --save-dev`. Easy-peasy-lemon-squeezy!
 
 How do I use it?
 ----------------
