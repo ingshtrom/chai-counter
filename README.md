@@ -66,3 +66,4 @@ counter.assert()
 ```
 
 __NOTE__ After loading, the `counter.expect(4)` and `counter.assert()` calls will be exactly the same for both Node.js and the browser.
+
